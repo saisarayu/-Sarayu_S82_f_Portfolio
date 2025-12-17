@@ -116,6 +116,7 @@ Balanced Solution Using Hybrid Rendering
 
 A hybrid approach was implemented by splitting the homepage into sections:
 
+
 Section	Rendering Strategy	Justification
 Layout & Header	Static	Rarely changes
 Featured Articles	ISR (5–10 minutes)	Not time-critical
@@ -151,6 +152,6 @@ A hybrid page using ISR to balance freshness and scalability
 
 Explanation of why using SSR everywhere is not cost-effective
 
-Conclusion
+Conclusion:-
 
 Using a combination of static, dynamic, and hybrid rendering allows the application to remain fast, scalable, and reasonably fresh. Rendering strategy is treated as a design decision rather than a default choice, ensuring that each page uses the most appropriate approach based on its data requirements.
