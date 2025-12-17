@@ -1,0 +1,156 @@
+Rendering Strategies in Next.js (Static, Dynamic & Hybrid)
+Overview
+
+This project demonstrates how different data rendering strategies in Next.js App Router affect performance, scalability, and data freshness. Instead of using a single rendering approach across the application, pages are rendered based on the nature of their data and user requirements.
+
+The application intentionally uses Static Rendering (SSG), Dynamic Rendering (SSR), and Hybrid Rendering (ISR) to achieve a balanced and scalable architecture.
+
+Rendering Trade-offs
+
+Rendering decisions are made using the trade-off triangle:
+
+Speed
+
+Freshness
+
+Scalability
+
+Each rendering mode optimizes two of these while sacrificing one.
+
+Rendering Type	Performance	Data Freshness	Scalability
+Static (SSG)	High	Low	High
+Dynamic (SSR)	Medium	High	Medium
+Hybrid (ISR)	Medium	Medium	Medium
+Rendering Strategies Used in the Application
+Static Rendering (SSG)
+
+Used for
+
+Public landing pages
+
+Informational and featured content
+
+Reason
+These pages change infrequently and are accessed by many users. Static rendering ensures fast load times, low latency, and excellent scalability.
+
+Implementation
+
+fetch(url, { cache: 'force-cache' })
+
+
+Impact
+
+Fastest page load
+
+Zero server computation per request
+
+Data may become stale over time
+
+Dynamic Rendering (SSR)
+
+Used for
+
+User dashboard
+
+Personalized or authenticated pages
+
+Reason
+User-specific data must always be accurate and up to date. Caching or static generation could result in incorrect data being shown to users.
+
+Implementation
+
+fetch(url, { cache: 'no-store' })
+
+
+or
+
+export const dynamic = 'force-dynamic';
+
+
+Impact
+
+Always fresh data
+
+Higher server cost
+
+Slower than static pages
+
+Hybrid Rendering (ISR)
+
+Used for
+
+News feed
+
+Frequently updated public content
+
+Reason
+This data changes often but does not require real-time updates on every request. ISR provides a balance between freshness and performance while keeping infrastructure costs under control.
+
+Implementation
+
+fetch(url, { next: { revalidate: 60 } })
+
+
+Impact
+
+Periodically fresh data
+
+Better scalability than full SSR
+
+Slight staleness between revalidation windows
+
+Case Study: “The News Portal That Felt Outdated”
+Problem
+
+The homepage was initially statically generated, resulting in fast load times but outdated “Breaking News” content. Switching the entire site to server-side rendering fixed the freshness issue but caused slower page loads and increased hosting costs.
+
+Analysis
+
+Static rendering failed to keep time-sensitive content fresh
+
+Dynamic rendering everywhere increased server load and cost
+
+A single rendering strategy was applied where a mixed approach was needed
+
+Balanced Solution Using Hybrid Rendering
+
+A hybrid approach was implemented by splitting the homepage into sections:
+
+Section	Rendering Strategy	Justification
+Layout & Header	Static	Rarely changes
+Featured Articles	ISR (5–10 minutes)	Not time-critical
+Breaking News	ISR (30–60 seconds)	Requires frequent updates
+User-specific Content	Dynamic	Personalized data
+Example
+fetch('/api/breaking-news', {
+  next: { revalidate: 60 }
+});
+
+
+This approach maintains fast load times while ensuring critical content stays reasonably fresh without excessive server usage.
+
+Rendering Decision Framework
+
+The following logic is used to choose rendering strategies:
+
+User-specific or real-time data → Dynamic Rendering
+
+Public content that rarely changes → Static Rendering
+
+Public content that updates frequently → Hybrid Rendering (ISR)
+
+Video Demonstration
+
+In the video demo, the following are demonstrated:
+
+A statically rendered page and its performance benefits
+
+A dynamically rendered dashboard requiring fresh data
+
+A hybrid page using ISR to balance freshness and scalability
+
+Explanation of why using SSR everywhere is not cost-effective
+
+Conclusion
+
+Using a combination of static, dynamic, and hybrid rendering allows the application to remain fast, scalable, and reasonably fresh. Rendering strategy is treated as a design decision rather than a default choice, ensuring that each page uses the most appropriate approach based on its data requirements.
