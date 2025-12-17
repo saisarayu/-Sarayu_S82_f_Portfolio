@@ -1,0 +1,6 @@
+.env.development
+.env.production
+.env.test
+.DS_Store
+.env.staging
+.env.example
