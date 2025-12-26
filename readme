@@ -456,3 +456,21 @@ How a redesigned pipeline ensures clean deployments
 Conclusion
 
 Docker and CI/CD pipelines simplify cloud deployments by making them automated, repeatable, and secure. When combined with proper secret management and container lifecycle handling, they prevent common production failures like inconsistent versions, broken deployments, and security leaks. This approach reflects real-world DevOps best practices used in AWS and Azure deployments.
+## Docker Setup
+
+This project uses Docker and Docker Compose to run the full stack locally.
+
+### Services
+- app: Next.js application running on port 3000
+- db: PostgreSQL database running on port 5432
+- redis: Redis cache running on port 6379
+
+### How It Works
+- Dockerfile builds and runs the Next.js app
+- docker-compose.yml defines all services and a shared bridge network
+- Containers communicate using service names (db, redis)
+- PostgreSQL data is persisted using Docker volumes
+
+### How to Run
+```bash
+docker-compose up --build
