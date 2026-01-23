@@ -461,6 +461,13 @@ JWT Structure:
 - Payload: userId, role, exp
 - Signature: HMAC SHA256
 
+RBAC centralizes authorization logic, making audits easier.
+
+New roles can be added without changing API logic.
+
+Logging supports security monitoring and compliance.
+
+For larger systems, RBAC can evolve into policy-based access control (PBAC) using attributes like resource ownership or time-based rules.
 ## Docker Setup
 
 This project uses Docker and Docker Compose to run the full stack locally.
