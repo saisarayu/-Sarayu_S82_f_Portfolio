@@ -559,3 +559,57 @@ Controlled upload permissions
 Secure presigned URL generation
 
 File validation before upload
+🔐 Cloud Secret Management Integration
+Overview
+
+This project implements secure secrets management using a managed cloud secret service instead of hardcoding sensitive credentials in the application. The goal was to store, retrieve, and inject secrets dynamically at runtime while following best security practices.
+
+Cloud Secret Manager Used
+
+Chosen Service:
+
+AWS Secrets Manager (or Azure Key Vault – replace if applicable)
+
+Reason for Choice:
+
+Centralized and encrypted storage of secrets
+
+Fine-grained IAM access control
+
+Secure runtime retrieval
+
+Built-in rotation support
+
+Eliminates need to store passwords in code or environment files
+
+Secrets Stored
+
+The following application credentials were stored securely in the secret manager:
+
+DATABASE_URL
+
+API_KEYS
+
+ACCESS_TOKENS
+
+THIRD-PARTY SERVICE CREDENTIALS
+
+No sensitive values are stored directly in the codebase or GitHub repository.
+
+Steps Followed
+1. Creating the Secret
+
+AWS Secrets Manager Steps:
+
+Opened AWS Console → Secrets Manager
+
+Clicked “Store a new secret”
+
+Selected Other type of secret
+
+Added key-value pairs
+
+Named the secret: nextjs-app-secrets
+
+Enabled encryption using default KMS key
+
