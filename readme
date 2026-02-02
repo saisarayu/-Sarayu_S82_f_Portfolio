@@ -506,6 +506,8 @@ Implementing CSP required explicitly allowing third-party services like Google A
 These headers significantly reduce XSS, MITM, and data exfiltration risks.
 
 
+
 ### How to Run
+
 ```bash
 docker-compose up --build
