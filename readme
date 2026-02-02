@@ -529,3 +529,33 @@ Region	ap-south-1
 Endpoint	your-endpoint.amazonaws.com
 Port	5432
 Backup Retention	7 days
+
+Project Overview
+
+This project implements secure file upload and retrieval using cloud object storage (AWS S3 / Azure Blob Storage) integrated with a Next.js application. The solution uses presigned URLs / SAS tokens to allow direct uploads to cloud storage without exposing sensitive credentials to the frontend.
+
+Cloud Provider Used
+
+Provider: AWS S3 (Replace with Azure if used)
+Storage Resource: S3 Bucket
+Bucket Name: kalvium-storage
+Region: ap-south-1
+Access Level: Private
+
+Storage Configuration
+
+A private storage bucket was created to securely store uploaded files.
+
+Public access was disabled to prevent unauthorized downloads.
+
+Optional versioning and lifecycle rules were considered for file management.
+
+Key Features Enabled
+
+Private access policy
+
+Controlled upload permissions
+
+Secure presigned URL generation
+
+File validation before upload
